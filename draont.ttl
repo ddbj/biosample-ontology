@@ -1,0 +1,528 @@
+@prefix : <http://ddbj.nig.ac.jp/ontologies/dra/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://ddbj.nig.ac.jp/ontologies/dra/> .
+
+<http://ddbj.nig.ac.jp/ontologies/dra/> a owl:Ontology .
+
+:librarySource
+    a owl:ObjectProperty ;
+    rdfs:domain :ExperimentDesign ;
+    rdfs:range :LibrarySource ;
+    rdfs:comment "a type of source material that is sequenced" ;
+    rdfs:label "library_source" .
+
+:librarySelection
+    a owl:ObjectProperty ;
+    rdfs:domain :ExperimentDesign ;
+    rdfs:range :LibrarySelection ;
+    rdfs:comment "a method used to select and/or enrich the material sequenced" ;
+    rdfs:label "library_selection" .
+
+:libraryStrategy
+    a owl:ObjectProperty ;
+    rdfs:domain :ExperimentDesign ;
+    rdfs:range :LibraryStrategy ;
+    rdfs:comment "a sequencing technique intended for this library" ;
+    rdfs:label "library_strategy" .
+
+:instrumentModel
+    a owl:ObjectProperty ;
+    rdfs:domain :InstrumentCategory ; #ILLUMINA, ABI_SOLID, etc.
+    rdfs:range :InstrumentModel ;
+    rdfs:comment "a sequencing instrument model" ;
+    rdfs:label "instrument_model" .
+
+:libraryLayout
+    a owl:ObjectProperty ;
+    rdfs:domain :ExperimentDesign ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf (
+            :SINGLE
+            :PAIRED
+            )
+        ] ;
+    rdfs:comment "a layout of reads in the sequencing data files" ;
+    rdfs:label "library_layout" .
+
+:nominalLength
+    a owl:DatatypeProperty ;
+    rdfs:domain :PAIRED ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "size of the insert for paired reads" ;
+    rdfs:label "nominal_length" .
+
+:nominalSdev
+    a owl:DatatypeProperty ;
+    rdfs:domain :PAIRED ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "standard deviation of the insert size" ;
+    rdfs:label "nominal_sdev" .
+
+:designDescription
+    a owl:DatatypeProperty ;
+    rdfs:domain :Experiment ;
+    rdfs:range rdfs:Literal ;
+    rdfs:comment "a description of the experiment design" ;
+    rdfs:label "design_description" .
+
+:design
+    a owl:ObjectProperty ;
+    rdfs:domain :Experiment ;
+    rdfs:range :ExperimentDesign ;
+    rdfs:comment "a design of the experiment" ;
+    rdfs:label "design" .
+
+:title
+    a owl:DatatypeProperty ;
+    rdfs:domain :Experiment ;
+    rdfs:range rdfs:Literal ;
+    rdfs:comment "a short text that can be used to call out experiment records in searches or in displays" ;
+    rdfs:label "title" .
+
+:libraryName
+    a owl:DatatypeProperty ;
+    rdfs:domain :ExperimentDesign ;
+    rdfs:range rdfs:Literal ;
+    rdfs:comment "a name of the library" ;
+    rdfs:label "library_name" .
+
+:libraryConstructionProtocol
+    a owl:DatatypeProperty ;
+    rdfs:domain :ExperimentDesign ;
+    rdfs:range rdfs:Literal ;
+    rdfs:comment "a free form text describing the protocol by which the sequencing library was constructed" ;
+    rdfs:label "library_construction_protocol" .
+
+:platform
+    a owl:ObjectProperty ;
+    rdfs:domain :Experiment ;
+    rdfs:range :InstrumentCategory ;
+    rdfs:comment "a sequencing platform" ;
+    rdfs:label "platform" .
+
+:InstrumentCategory
+    a owl:Class ;
+    rdfs:comment "a category of sequencing platforms" ;
+    rdfs:label "instrument_category" .
+
+:PAIRED
+    a owl:Class ;
+    rdfs:comment "paired reads" ;
+    rdfs:label "paired" .
+
+:SINGLE
+    a owl:Class ;
+    rdfs:comment "single read" ;
+    rdfs:label "single" .
+
+:LibrarySource
+    a owl:Class ;
+    rdfs:label "library_source_class" .
+
+:LibrarySelection
+    a owl:Class ;
+    rdfs:label "library_selection_class" .
+
+:LibraryStrategy
+    a owl:Class ;
+    rdfs:label "library_strategy_class" .
+
+:InstrumentModel
+    a owl:Class ;
+    rdfs:label "instrument_model_class" .
+
+:Experiment
+    a owl:Class ;
+    rdfs:label "experiment" .
+
+:ExperimentDesign
+    a owl:Class ;
+    rdfs:label "experiment_design" .
+
+:GENOMIC a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Genomic DNA (includes PCR products from genomic DNA)." .
+
+:TRANSCRIPTOMIC a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Transcription products or non genomic DNA (EST, cDNA, RT-PCR, screened libraries)." .
+
+:METAGENOMIC a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Mixed material from metagenome." .
+
+:METATRANSCRIPTOMIC a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Transcription products from community targets." .
+
+:SYNTHETIC a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Synthetic DNA." .
+
+:VIRAL_RNA a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Viral RNA." .
+
+:OTHER a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Other, unspecified, or unknown library source material." .
+
+:GENOMIC_SINGLE_CELL a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Genomic DNA from a single cell." .
+
+:TRANSCRIPTOMIC_SINGLE_CELL a owl:NamedIndividual , :LibrarySource ;
+    rdfs:comment "Transcription products from a single cell." .
+
+
+:RANDOM a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Random shearing only." .
+
+:PCR a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Source material was selected by designed primers." .
+
+:RANDOM_PCR a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Source material was selected by randomly generated primers." .
+
+:RT-PCR a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Source material was selected by reverse transcription PCR." .
+
+:HMPR a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Hypo-methylated partial restriction digest." .
+
+:MF a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Methyl Filtrated." .
+
+:repeat_fractionation a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Selection for less repetitive (and more gene rich) sequence through Cot filtration (CF) or other fractionation techniques based on DNA kinetics." .
+
+:size_fractionation a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Physical selection of size appropriate targets." .
+
+:MSLL a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Methylation Spanning Linking Library." .
+
+:cDNA a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "complementary DNA." .
+
+:cDNA_randomPriming a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "" .
+
+:cDNA_oligo_dT a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "" .
+
+:PolyA a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "PolyA selection or enrichment for messenger RNA (mRNA); should replace cDNA enumeration." .
+
+:Oligo-dT a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "enrichment of messenger RNA (mRNA) by hybridization to Oligo-dT." .
+
+:Inverse_rRNA a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "depletion of ribosomal RNA by oligo hybridization." .
+
+:ChIP a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Chromatin immunoprecipitation." .
+
+:MNase a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Micrococcal Nuclease (MNase) digestion." .
+
+:DNase a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Deoxyribonuclease (DNase) digestion." .
+
+:Hybrid_Selection a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Selection by hybridization in array or solution." .
+
+:Reduced_Representation a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Reproducible genomic subsets, often generated by restriction fragment size selection, containing a manageable number of loci to facilitate re-sampling." .
+
+:Restriction_Digest a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "DNA fractionation using restriction enzymes." .
+
+:5-methylcytidine_antibody a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Selection of methylated DNA fragments using an antibody raised against 5-methylcytosine or 5-methylcytidine (m5C)MBD2 protein methyl-CpG binding domain : Enrichment by methyl-CpG binding domain." .
+
+:MBD2_protein_methyl-CpG_binding_domain a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "MBD2 protein methyl-CpG binding domain." .
+
+:CAGE a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Cap-analysis gene expression." .
+
+:RACE a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Rapid Amplification of cDNA Ends." .
+
+:MDA a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "multiple displacement amplification." .
+
+:padlock_probes_capture_method a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Padlock Probes capture strategy to be used in conjuction with Bisulfite-Seq." .
+
+:other a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Other library enrichment, screening, or selection process." .
+
+:unspecified a owl:NamedIndividual , :LibrarySelection ;
+    rdfs:comment "Library enrichment, screening, or selection is not specified." .
+
+
+
+:WGS a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Whole genome shotgun." .
+
+:WGA a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Whole genome amplification." .
+
+:WXS a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Random sequencing of exonic regions selected from the genome." .
+
+:RNA-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Random sequencing of whole transcriptome." .
+
+:miRNA-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Micro RNA and other small non-coding RNA sequencing." .
+
+:ncRNA-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Capture of other non-coding RNA types, including post-translation modification types such as snRNA (small nuclear RNA) or snoRNA (small nucleolar RNA), or expression regulation types such as siRNA (small interfering RNA) or piRNA/piwi/RNA (piwi-interacting RNA)." .
+
+:ssRNA-seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "strand-specific RNA sequencing" .
+
+:WCS a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Whole chromosome (or other replicon) shotgun." .
+
+:CLONE a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Genomic clone based (hierarchical) sequencing." .
+
+:POOLCLONE a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Shotgun of pooled clones (usually BACs and Fosmids)." .
+
+:AMPLICON a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Sequencing of overlapping or distinct PCR or RT-PCR products." .
+
+:CLONEEND a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Clone end (5', 3', or both) sequencing." .
+
+:FINISHING a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Sequencing intended to finish (close) gaps in existing coverage." .
+
+:RAD-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Restriction Site Associated DNA Sequence" .
+
+:ChIP-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Direct sequencing of chromatin immunoprecipitates." .
+
+:MNase-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Direct sequencing following MNase digestion." .
+
+:DNase-Hypersensitivity a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Sequencing of hypersensitive sites, or segments of open chromatin that are more readily cleaved by DNaseI." .
+
+:Bisulfite-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Sequencing following treatment of DNA with bisulfite to convert cytosine residues to uracil depending on methylation status." .
+
+:EST a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Single pass sequencing of cDNA templates." .
+
+:FL-cDNA a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Full-length sequencing of cDNA templates." .
+
+:CTS a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Concatenated Tag Sequencing." .
+
+:MRE-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Methylation-Sensitive Restriction Enzyme Sequencing strategy." .
+
+:MeDIP-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Methylated DNA Immunoprecipitation Sequencing strategy." .
+
+:MBD-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Direct sequencing of methylated fractions sequencing strategy." .
+
+:Tn-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Gene fitness determination through transposon seeding." .
+
+:FAIRE-seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Formaldehyde Assisted Isolation of Regulatory Elements" .
+
+:SELEX a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Systematic Evolution of Ligands by EXponential enrichment" .
+
+:RIP-Seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Direct sequencing of RNA immunoprecipitates (includes CLIP-Seq, HITS-CLIP and PAR-CLIP)." .
+
+:ChIA-PET a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Direct sequencing of proximity-ligated chromatin immunoprecipitates." .
+
+:Hi-C a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Chromosome Conformation Capture technique where a biotin-labeled nucleotide is incorporated at the ligation junction, enabling selective purification of chimeric DNA ligation junctions followed by deep sequencing" .
+
+:ATAC-seq a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Assay for Transposase-Accessible Chromatin (ATAC) strategy is used to study genome-wide chromatin accessibility. alternative method to DNase-seq that uses an engineered Tn5 transposase to cleave DNA and to integrate primer DNA sequences into the cleaved genomic DNA" .
+
+:Targeted-Capture a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "" .
+
+:Tethered_Chromatin_Conformation_Capture a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "" .
+
+:Synthetic-Long-Read a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "binning and barcoding of large DNA fragments to facilitate assembly of the fragment" .
+
+:OTHER a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Library strategy not listed." .
+
+
+:454_GS a owl:NamedIndividual , :InstrumentModel .
+
+:454_GS_20 a owl:NamedIndividual , :InstrumentModel .
+
+:454_GS_FLX a owl:NamedIndividual , :InstrumentModel .
+
+<http://ddbj.nig.ac.jp/ontologies/dra/454_GS_FLX+> a owl:NamedIndividual , :InstrumentModel .
+
+:454_GS_FLX_Titanium a owl:NamedIndividual , :InstrumentModel .
+
+:454_GS_Junior a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_Genome_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_Genome_Analyzer_II a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_Genome_Analyzer_IIx a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiSeq_1000 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiSeq_1500 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiSeq_2000 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiSeq_2500 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiSeq_3000 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiSeq_4000 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_NovaSeq_6000 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_MiSeq a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_MiniSeq a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_iSeq_100 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiScanSQ a owl:NamedIndividual , :InstrumentModel .
+
+:HiSeq_X_Five a owl:NamedIndividual , :InstrumentModel .
+
+:HiSeq_X_Ten a owl:NamedIndividual , :InstrumentModel .
+
+:NextSeq_500 a owl:NamedIndividual , :InstrumentModel .
+
+:NextSeq_550 a owl:NamedIndividual , :InstrumentModel .
+
+:Helicos_HeliScope a owl:NamedIndividual , :InstrumentModel .
+
+:AB_SOLiD_System a owl:NamedIndividual , :InstrumentModel .
+
+:AB_SOLiD_System_2.0 a owl:NamedIndividual , :InstrumentModel .
+
+:AB_SOLiD_System_3.0 a owl:NamedIndividual , :InstrumentModel .
+
+:AB_SOLiD_3_Plus_System a owl:NamedIndividual , :InstrumentModel .
+
+:AB_SOLiD_4_System a owl:NamedIndividual , :InstrumentModel .
+
+:AB_SOLiD_4hq_System a owl:NamedIndividual , :InstrumentModel .
+
+:AB_SOLiD_PI_System a owl:NamedIndividual , :InstrumentModel .
+
+:AB_5500_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_5500xl_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_5500xl-W_Genetic_Analysis_System a owl:NamedIndividual , :InstrumentModel .
+
+:Complete_Genomics a owl:NamedIndividual , :InstrumentModel .
+
+:MinION a owl:NamedIndividual , :InstrumentModel .
+
+:GridION a owl:NamedIndividual , :InstrumentModel .
+
+:PromethION a owl:NamedIndividual , :InstrumentModel .
+
+:PacBio_RS a owl:NamedIndividual , :InstrumentModel .
+
+:PacBio_RS_II a owl:NamedIndividual , :InstrumentModel .
+
+:Sequel a owl:NamedIndividual , :InstrumentModel .
+
+:Ion_Torrent_PGM a owl:NamedIndividual , :InstrumentModel .
+
+:Ion_Torrent_Proton a owl:NamedIndividual , :InstrumentModel .
+
+:Ion_Torrent_S5 a owl:NamedIndividual , :InstrumentModel .
+
+:Ion_Torrent_S5_XL a owl:NamedIndividual , :InstrumentModel .
+
+:AB_310_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_3130_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_3130xL_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_3500_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_3500xL_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_3730_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:AB_3730xL_Genetic_Analyzer a owl:NamedIndividual , :InstrumentModel .
+
+:BGISEQ-50 a owl:NamedIndividual , :InstrumentModel .
+
+:BGISEQ-500 a owl:NamedIndividual , :InstrumentModel .
+
+:DNBSEQ-G400 a owl:NamedIndividual , :InstrumentModel .
+
+:DNBSEQ-G50 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_HiSeq_X_Ten a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_NextSeq_500 a owl:NamedIndividual , :InstrumentModel .
+
+:Illumina_NextSeq_550 a owl:NamedIndividual , :InstrumentModel .
+
+:Ion_S5 a owl:NamedIndividual , :InstrumentModel .
+
+:Ion_S5_XL a owl:NamedIndividual , :InstrumentModel .
+
+:Sequel_II a owl:NamedIndividual , :InstrumentModel .
+
+:Unspecified a owl:NamedIndividual , :InstrumentModel .
+
+
+:ABI_SOLID a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:BGISEQ a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:CAPILLARY a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:COMPLETE_GENOMICS a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:HELICOS a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:ILLUMINA a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:ION_TORRENT a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:LS454 a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:OXFORD_NANOPORE a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+
+:PACBIO_SMRT a owl:Class ;
+    rdfs:subClassOf :InstrumentCategory .
+

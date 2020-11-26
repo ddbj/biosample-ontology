@@ -1,0 +1,47 @@
+@prefix : <http://ddbj.nig.ac.jp/ontology/biosample/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://ddbj.nig.ac.jp/ontology/biosample/> .
+
+<http://ddbj.nig.ac.jp/ontology/biosample/> a owl:Ontology .
+
+:AnnotationConfidence
+    a owl:DatatypeProperty ;
+    rdfs:domain <http://schema.org/PropertyValue> ;
+    rdfs:range [ a rdfs:Datatype ;
+        owl:onDatatype xsd:double ;
+        owl:withRestrictions (
+            [ xsd:minInclusive "0.0"^^xsd:double ]
+            [ xsd:maxInclusive "1.0"^^xsd:double ] ) ] ;
+    rdfs:comment "a confidence score for sample type prediction by the BioSamplePlus-pipeline" ;
+    rdfs:label "annotation_confidence" .
+
+:BioSampleRecord
+    a owl:Class ;
+    rdfs:comment "a BioSample record" ;
+    rdfs:label "BioSample_record" .
+
+:SampleType
+    a owl:Class ;
+    rdfs:comment "a category of sample type predicted by the BioSamplePlus-pipeline" ;
+    rdfs:label "sample_type" .
+
+:BioSamplePlusPipeline
+    a owl:NamedIndividual , <http://www.w3.org/ns/prov#Activity> ;
+    rdfs:comment "a pipeline to automatically map BioSample metadata to ontologies" ;
+    rdfs:label "BioSamplePlus_pipeline" .
+
+:CellLine a owl:NamedIndividual , :SampleType .
+
+:IPSCellLine a owl:NamedIndividual , :SampleType .
+
+:InVitroDifferintiatedCells a owl:NamedIndividual , :SampleType .
+
+:PrimaryCell a owl:NamedIndividual , :SampleType .
+
+:StemCell a owl:NamedIndividual , :SampleType .
+
+:Tissue a owl:NamedIndividual , :SampleType .
