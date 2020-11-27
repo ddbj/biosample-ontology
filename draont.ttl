@@ -162,7 +162,7 @@
 :VIRAL_RNA a owl:NamedIndividual , :LibrarySource ;
     rdfs:comment "Viral RNA." .
 
-:OTHER a owl:NamedIndividual , :LibrarySource ;
+:OTHER_SOURCE a owl:NamedIndividual , :LibrarySource ;
     rdfs:comment "Other, unspecified, or unknown library source material." .
 
 :GENOMIC_SINGLE_CELL a owl:NamedIndividual , :LibrarySource ;
@@ -253,10 +253,10 @@
 :padlock_probes_capture_method a owl:NamedIndividual , :LibrarySelection ;
     rdfs:comment "Padlock Probes capture strategy to be used in conjuction with Bisulfite-Seq." .
 
-:other a owl:NamedIndividual , :LibrarySelection ;
+:other_selection_method a owl:NamedIndividual , :LibrarySelection ;
     rdfs:comment "Other library enrichment, screening, or selection process." .
 
-:unspecified a owl:NamedIndividual , :LibrarySelection ;
+:unspecified_selection_method a owl:NamedIndividual , :LibrarySelection ;
     rdfs:comment "Library enrichment, screening, or selection is not specified." .
 
 
@@ -363,7 +363,7 @@
 :Synthetic-Long-Read a owl:NamedIndividual , :LibraryStrategy ;
     rdfs:comment "binning and barcoding of large DNA fragments to facilitate assembly of the fragment" .
 
-:OTHER a owl:NamedIndividual , :LibraryStrategy ;
+:Other_strategy a owl:NamedIndividual , :LibraryStrategy ;
     rdfs:comment "Library strategy not listed." .
 
 
@@ -493,7 +493,7 @@
 
 :Sequel_II a owl:NamedIndividual , :InstrumentModel .
 
-:Unspecified a owl:NamedIndividual , :InstrumentModel .
+:Unspecified_Instrument_Model a owl:NamedIndividual , :InstrumentModel .
 
 
 :ABI_SOLID a owl:Class ;
