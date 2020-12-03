@@ -363,6 +363,9 @@
 :Synthetic-Long-Read a owl:NamedIndividual , :LibraryStrategy ;
     rdfs:comment "binning and barcoding of large DNA fragments to facilitate assembly of the fragment" .
 
+:VALIDATION a owl:NamedIndividual , :LibraryStrategy ;
+    rdfs:comment "Independent experiment to re-evaluate putative variants." .
+
 :Other_strategy a owl:NamedIndividual , :LibraryStrategy ;
     rdfs:comment "Library strategy not listed." .
 
