@@ -1,0 +1,12 @@
+@prefix : <http://ddbj.nig.ac.jp/ontologies/bioproject/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://ddbj.nig.ac.jp/ontologies/bioproject/> .
+
+<http://ddbj.nig.ac.jp/ontologies/bioproject/> a owl:Ontology .
+
+:BioProjectRecord
+    a owl:Class ;
+    rdfs:comment "a BioProject record" ;
+    rdfs:label "BioProject_record" .
