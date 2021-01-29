@@ -8,7 +8,7 @@
 
 <http://ddbj.nig.ac.jp/ontologies/biosample/> a owl:Ontology .
 
-:AnnotationConfidence
+:annotationConfidence
     a owl:DatatypeProperty ;
     rdfs:domain <http://schema.org/PropertyValue> ;
     rdfs:range [ a rdfs:Datatype ;
@@ -17,7 +17,7 @@
             [ xsd:minInclusive "0.0"^^xsd:double ]
             [ xsd:maxInclusive "1.0"^^xsd:double ] ) ] ;
     rdfs:comment "a confidence score for sample type prediction by the BioSamplePlus-pipeline" ;
-    rdfs:label "annotation_confidence" .
+    rdfs:label "annotation confidence" .
 
 :BioSampleRecord
     a owl:Class ;
