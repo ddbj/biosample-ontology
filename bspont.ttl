@@ -26,13 +26,13 @@
 
 :SampleType
     a owl:Class ;
-    rdfs:comment "a category of sample type predicted by the BioSamplePlus-pipeline" ;
-    rdfs:label "sample_type" .
+    rdfs:comment "A category of sample type predicted by the BioSamplePlus-pipeline" ;
+    rdfs:label "Sample type" .
 
 :BioSamplePlusPipeline
     a owl:NamedIndividual , <http://www.w3.org/ns/prov#Activity> ;
-    rdfs:comment "a pipeline to automatically map BioSample metadata to ontologies" ;
-    rdfs:label "BioSamplePlus_pipeline" .
+    rdfs:comment "A pipeline that automatically maps some ontologies to BioSample metadata." ;
+    rdfs:label "BioSamplePlus pipeline" .
 
 :CellLine a owl:NamedIndividual , :SampleType .
 
