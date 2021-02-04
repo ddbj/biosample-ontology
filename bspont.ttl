@@ -22,17 +22,17 @@
 :BioSampleRecord
     a owl:Class ;
     rdfs:comment "a BioSample record" ;
-    rdfs:label "BioSample_record" .
+    rdfs:label "BioSample record" .
 
 :SampleType
     a owl:Class ;
     rdfs:comment "A category of sample type predicted by the BioSamplePlus-pipeline" ;
     rdfs:label "Sample type" .
 
-:BioSamplePlusPipeline
+:BioSamplePlusCuration
     a owl:NamedIndividual , <http://www.w3.org/ns/prov#Activity> ;
-    rdfs:comment "A pipeline that automatically maps some ontologies to BioSample metadata." ;
-    rdfs:label "BioSamplePlus pipeline" .
+    rdfs:comment "An automated curation activity that maps some ontologies to BioSample metadata." ;
+    rdfs:label "BioSamplePlus curation" .
 
 :CellLine a owl:NamedIndividual , :SampleType .
 
