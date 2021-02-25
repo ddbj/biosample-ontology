@@ -29,10 +29,10 @@
     rdfs:comment "A category of sample type predicted by the BioSamplePlus-pipeline" ;
     rdfs:label "Sample type" .
 
-:BioSamplePlusCuration
+:BioSamplePlusAnnotation
     a owl:NamedIndividual , <http://www.w3.org/ns/prov#Activity> ;
-    rdfs:comment "An automated curation activity that maps some ontologies to BioSample metadata." ;
-    rdfs:label "BioSamplePlus curation" .
+    rdfs:comment "Ontology annotation to BioSample metadata automated by BioSamplePlus pipeline." ;
+    rdfs:label "BioSamplePlus annotation" .
 
 :CellLine a owl:NamedIndividual , :SampleType .
 
